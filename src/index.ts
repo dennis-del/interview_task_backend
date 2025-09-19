@@ -48,6 +48,11 @@ app.use(errorHandler);
 // Start server
 const PORT = process.env.PORT || 9001;
 
+app.get("/", (req, res) => {
+  res.send("✅ Server is running on Render!");
+});
+
+
 const startServer = async () => {
   try {
     await connectDB();
