@@ -12,7 +12,7 @@ export const AppDataSource = new DataSource(
     ? {
         type: "postgres",
         url: process.env.DATABASE_URL, // Render will inject this
-        synchronize: false, // recommended for prod
+        synchronize: true, // recommended for prod
         logging: false,
         ssl: { rejectUnauthorized: false }, // important for Render
         entities: [path.join(__dirname, "../models/*.{js,ts}")],
