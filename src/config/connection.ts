@@ -11,13 +11,12 @@ export const AppDataSource = new DataSource(
   isProd
     ? {
         type: "postgres",
-        url: process.env.DATABASE_URL, // Render injects this
-        synchronize: true, // ⚠️ only for dev/demo, use migrations later
+        url: process.env.DATABASE_URL,
+        synchronize: false, // recommended for production
         logging: false,
-        ssl: { rejectUnauthorized: false }, // needed for Render
-        entities: [path.join(__dirname, "../models/*.{js}")],
-        migrations: [path.join(__dirname, "../migrations/**/*.{js}")],
-        subscribers: [],
+        ssl: { rejectUnauthorized: false },
+        entities: [path.join(__dirname, "../models/*.{js,ts}")],
+        migrations: [path.join(__dirname, "../migrations/**/*.{js,ts}")],
       }
     : {
         type: "postgres",
@@ -28,11 +27,12 @@ export const AppDataSource = new DataSource(
         database: process.env.DB_NAME,
         synchronize: true, // ok for local dev
         logging: true,
-        entities: [path.join(__dirname, "../models/*.{ts}")],
-        migrations: [path.join(__dirname, "../migrations/**/*.{ts}")],
-        subscribers: [],
+        entities: [path.join(__dirname, "../models/*.{ts,js}")],
+        migrations: [path.join(__dirname, "../migrations/**/*.{ts,js}")],
       }
 );
+
+
 
 export const connectDB = async () => {
   try {
