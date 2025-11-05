@@ -14,9 +14,10 @@ export const AppDataSource = new DataSource(
         url: process.env.DATABASE_URL,
         synchronize: false,
         logging: false,
-        ssl: true,
+        ssl: false,
         extra: {
           ssl: {
+            require: true,
             rejectUnauthorized: false,
           },
         },
