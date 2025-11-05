@@ -12,15 +12,9 @@ export const AppDataSource = new DataSource(
     ? {
         type: "postgres",
         url: process.env.DATABASE_URL,
-        synchronize: false,
+        synchronize: false, // recommended for production
         logging: false,
-        ssl: false,
-        extra: {
-          ssl: {
-            require: true,
-            rejectUnauthorized: false,
-          },
-        },
+        ssl: { rejectUnauthorized: false },
         entities: [path.join(__dirname, "../models/*.{js,ts}")],
         migrations: [path.join(__dirname, "../migrations/**/*.{js,ts}")],
       }
@@ -31,13 +25,12 @@ export const AppDataSource = new DataSource(
         username: process.env.DB_USERNAME || process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
-        synchronize: true,
+        synchronize: true, // ok for local dev
         logging: true,
         entities: [path.join(__dirname, "../models/*.{ts,js}")],
         migrations: [path.join(__dirname, "../migrations/**/*.{ts,js}")],
       }
 );
-
 
 
 
